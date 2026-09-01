@@ -7,3 +7,15 @@ def test_lu_reconstructs_a():
     A = np.array([[1., 3., 0.], [2., 4., 0.], [2., 0., 1.]])
     L, U = lu(A)
     assert np.allclose(L @ U, A)
+
+def test_u_is_upper_triangular():
+    A = np.array([[1., 3., 0.], [2., 4., 0.], [2., 0., 1.]])
+    L, U = lu(A)
+    assert np.allclose(U, np.triu(U))
+
+def test_l_is_unit_lower_triangular():
+    A = np.array([[1., 3., 0.], [2., 4., 0.], [2., 0., 1.]])
+    L, U = lu(A)
+    assert np.allclose(L, np.tril(L))
+    assert np.allclose(1, np.diag(L))
+
